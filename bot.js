@@ -9,7 +9,8 @@ var question, answer, totalquestions, questionNum = 0;
 
 function respond() {
    var request = JSON.parse(this.req.chunks[0]),
-        botRegex = /^\/startgame\s/;
+        botRegex = /^\/startgame\s/,
+        badRegex = /^\/startgame$/
 
    if(request.text && botRegex.test(request.text)) {
      this.res.writeHead(200);
@@ -18,6 +19,8 @@ function respond() {
      this.res.end();
    } else if (request.text && request.text == answer) {
       correct(request.name)
+   } else if (request.text && badRegex.test(request.text)) {
+     sendMessage('You must specify how many questions you want in the competition. Like so:\n\n/startgame 5')
    } else {
      console.log("don't care");
      this.res.writeHead(200);
