@@ -28,7 +28,7 @@ function respond() {
 function startGame(num) {
   questionNum++
   console.log('starting game. requested ' + num + 'questions')
-  totalquestions = num
+  totalquestions = Number(num)
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
@@ -38,11 +38,19 @@ function startGame(num) {
 
 function correct(name) {
    questionNum++
-   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
-   question = questions[questionIndex].question;
-   answer = questions[questionIndex].answer;
-   console.log(question, answer)
-   sendMessage(name + ' your answer is correct.\n\nQuestion ' + questionNum + ': ' + question)
+   if (questionNum <= totalquestions) {
+      var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
+      question = questions[questionIndex].question;
+      answer = questions[questionIndex].answer;
+      console.log(question, answer)
+      sendMessage(name + ' your answer is correct.\n\nQuestion ' + questionNum + '/' + totalquestions + ': ' + question)
+   } else {
+      sendMessage(name + ' your answer is correct.\n\nGood game everyone.')
+      answer = ''
+      question = ''
+      totalquestions = 0
+      questionNum = 0
+   }
 }
 
 function sendMessage(message) {
