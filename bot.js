@@ -3,7 +3,7 @@ var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
-var questions = [{"question":"What is 1 + 1?","answer":"2"}]
+var questions = [{"question":"What is 1 + 1?","answer":"2"},{"question":"What is the square root of 64?","answer":"8"}]
 
 var question, answer, questionNum = 0;
 
