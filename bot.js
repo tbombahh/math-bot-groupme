@@ -5,7 +5,7 @@ var botID = process.env.BOT_ID;
 
 var questions = [{"question":"What is 1 + 1?","answer":"2"}]
 
-var question, answer, playing = false;
+var question, answer, questionNum = 0;
 
 function respond() {
    var request = JSON.parse(this.req.chunks[0]),
@@ -16,7 +16,7 @@ function respond() {
      startGame()
      this.res.end();
    } else if (request.text && request.text == answer) {
-      sendMessage(request.name + ' your answer is correct.')
+      correct(request.name)
    } else {
      console.log("don't care");
      this.res.writeHead(200);
@@ -25,13 +25,21 @@ function respond() {
 }
 
 function startGame() {
-  playing = true
-  
+  questionNum++
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
   console.log(question, answer)
   sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.\n\nQuestion 1: ' + question);
+}
+
+function correct(name) {
+   questionNum++
+   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
+   question = questions[questionIndex].question;
+   answer = questions[questionIndex].answer;
+   console.log(question, answer)
+   sendMessage(name + ' your answer is correct.\n\nQuestion ' + questionNum + ': ' + question)
 }
 
 function sendMessage(message) {
