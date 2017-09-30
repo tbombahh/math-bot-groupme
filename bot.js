@@ -29,11 +29,12 @@ function respond() {
 }
 
 function startGame() {
+  playing = true
   sendMessage('-- Starting Math Game --')
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
-  sendMessage('Question 1: ' + question)
+  setTimeout(sendMessage('Question 1: ' + question), 100)
 }
 
 function sendMessage(message) {
