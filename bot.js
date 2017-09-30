@@ -8,33 +8,30 @@ var questions = [{"question":"What is 1 + 1?","answer":"2"}]
 var question, answer, playing = false;
 
 function respond() {
-  if (playing == false) {
-    var request = JSON.parse(this.req.chunks[0]),
+   var request = JSON.parse(this.req.chunks[0]),
         botRegex = /^\/startgame$/;
 
-    if(request.text && botRegex.test(request.text)) {
-      this.res.writeHead(200);
-      startGame()
-      this.res.end();
-    } else {
-      console.log("don't care");
-      this.res.writeHead(200);
-      this.res.end();
-    }
-  } else {
-    if (request.text && request.text == answer) {
+   if(request.text && botRegex.test(request.text)) {
+     this.res.writeHead(200);
+     startGame()
+     this.res.end();
+   } else if (request.text && request.text == answer) {
       sendMessage(request.name + ' your answer is correct.')
-    }
-  }
+   } else {
+     console.log("don't care");
+     this.res.writeHead(200);
+     this.res.end();
+   }
 }
 
 function startGame() {
   playing = true
-  sendMessage('-- Starting Math Game --')
+  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.')
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
-  setTimeout(sendMessage('Question 1: ' + question), 100)
+  console.log(question, answer)
+  setTimeout(sendMessage('Question 1: ' + question), 1000)
 }
 
 function sendMessage(message) {
