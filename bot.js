@@ -3,7 +3,7 @@ var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
-var questions = [{"question":"What is 1 + 1?","answer":"2"},{"question":"What is the square root of 64?","answer":"8"}]
+var questions = [{"question":"If F(a,b,c,d) = a^b + c * d, what is the valid of b such that F(6,b,4,3) = 48","answer":"2"},{"question":"The lengths of the sides of a triangle are 6 cm, 7 cm and 9 cm. In a similar triangle whose perimeter is 110 cm, what is the length of the longest side, in centimeters?","answer":"45"},{"question":"The length of a rectangle is three times its width. A new rectangle is created by decreasing the length of the original rectangle by half. By what factor must the original width be multiplied, if the area remains unchanged?","answer":"2"},{"question":"What is 1 + 1?","answer":"2"},{"question":"What is the square root of 64?","answer":"8"},{"question":"When its digits are reversed, a particular positive two-digit integer is increased by 20%. What is the original number?","answer":"45"}]
 
 var question, answer, totalquestions, questionNum = 0;
 
