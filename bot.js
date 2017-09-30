@@ -26,12 +26,13 @@ function respond() {
 
 function startGame() {
   playing = true
-  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.')
+  
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
   console.log(question, answer)
-  setTimeout(sendMessage('Question 1: ' + question), 1000)
+  sendMessage('Question 1: ' + question)
+  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.')
 }
 
 function sendMessage(message) {
