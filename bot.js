@@ -5,15 +5,16 @@ var botID = process.env.BOT_ID;
 
 var questions = [{"question":"What is 1 + 1?","answer":"2"},{"question":"What is the square root of 64?","answer":"8"}]
 
-var question, answer, questionNum = 0;
+var question, answer, totalquestions, questionNum = 0;
 
 function respond() {
    var request = JSON.parse(this.req.chunks[0]),
-        botRegex = /^\/startgame$/;
+        botRegex = /^\/startgame\s/;
 
    if(request.text && botRegex.test(request.text)) {
      this.res.writeHead(200);
-     startGame()
+     var numberOfQuestions = request.text.replace(botRegex, '')
+     startGame(numberOfQuestions)
      this.res.end();
    } else if (request.text && request.text == answer) {
       correct(request.name)
@@ -24,13 +25,15 @@ function respond() {
    }
 }
 
-function startGame() {
+function startGame(num) {
   questionNum++
+  console.log('starting game. requested ' + num + 'questions')
+  totalquestions = num
   var questionIndex = Math.floor((Math.random() * 10) + 1) % questions.length;
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
   console.log(question, answer)
-  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.\n\nQuestion 1: ' + question);
+  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.\n\nQuestion 1/' + totalquestions + ': ' + question);
 }
 
 function correct(name) {
