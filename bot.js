@@ -31,8 +31,7 @@ function startGame() {
   question = questions[questionIndex].question;
   answer = questions[questionIndex].answer;
   console.log(question, answer)
-  sendMessage('Question 1: ' + question)
-  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.')
+  sendMessage('-- Starting Math Game --\nThe first to answer correctly gets that question correct.\n\nQuestion 1: ' + question);
 }
 
 function sendMessage(message) {
